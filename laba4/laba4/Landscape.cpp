@@ -12,6 +12,23 @@
 #include <fstream>
 using namespace std;
 namespace  laba4{
+    int get_int(int& a) {
+        int r = 0;
+        do {
+            std::cin >> a;
+            if (std::cin.eof()) {
+                std::cin.clear();
+                return -1;
+            }
+            if (!std::cin.good()) {
+                std::cin.clear();
+                while (std::cin.get() != '\n');
+                r++;
+            }
+            else r = 0;
+        } while (r);
+        return r;
+    }
     Cell::Cell(char m){
         if (m=='.'){cell=POINT; object=EMPTY_OBJECT;}
         if (m==' '){cell=EMPTYNESS;  object=EMPTY_OBJECT;}
@@ -70,10 +87,10 @@ namespace  laba4{
             rectangle[i][j].set_cell(EMPTYNESS);
              emptyness--;
          }
-        rectangle[User_Summoner.get_coordinates().x][User_Summoner.get_coordinates().y].set_cell(EMPTY_CELL);
+        /*rectangle[User_Summoner.get_coordinates().x][User_Summoner.get_coordinates().y].set_cell(EMPTY_CELL);
         rectangle[User_Summoner.get_coordinates().x][User_Summoner.get_coordinates().y].set_object(USER_SUMMONER);
         rectangle[Enemy_Summoner.get_coordinates().x][Enemy_Summoner.get_coordinates().y].set_cell(EMPTY_CELL);
-        rectangle[Enemy_Summoner.get_coordinates().x][Enemy_Summoner.get_coordinates().y].set_object(ENEMY_SUMMONER);
+        rectangle[Enemy_Summoner.get_coordinates().x][Enemy_Summoner.get_coordinates().y].set_object(ENEMY_SUMMONER);*/
     }
     void Landscape:: input_map(){
         ifstream fs1("input_map");
@@ -92,14 +109,34 @@ namespace  laba4{
             rectangle.push_back(p);
         }
         fs1.close();
-        rectangle[User_Summoner.get_coordinates().x][User_Summoner.get_coordinates().y].set_cell(EMPTY_CELL);
-        rectangle[User_Summoner.get_coordinates().x][User_Summoner.get_coordinates().y].set_object(USER_SUMMONER);
-        rectangle[Enemy_Summoner.get_coordinates().x][Enemy_Summoner.get_coordinates().y].set_cell(EMPTY_CELL);
-        rectangle[Enemy_Summoner.get_coordinates().x][Enemy_Summoner.get_coordinates().y].set_object(ENEMY_SUMMONER);
+       /* rectangle[User_Summoner.get_coordinates().y][User_Summoner.get_coordinates().x].set_cell(EMPTY_CELL);
+        rectangle[User_Summoner.get_coordinates().y][User_Summoner.get_coordinates().x].set_object(USER_SUMMONER);
+        rectangle[Enemy_Summoner.get_coordinates().y][Enemy_Summoner.get_coordinates().x].set_cell(EMPTY_CELL);
+        rectangle[Enemy_Summoner.get_coordinates().y][Enemy_Summoner.get_coordinates().x].set_object(ENEMY_SUMMONER);*/
     }
-    
+    void Landscape:: fprint_map(){
+        ofstream fs1("input_map_save");
+        if (!fs1.is_open()) throw  runtime_error("File can't open!");
+        fs1<<n;
+        fs1<<endl;
+        fs1<<m;
+        fs1<<endl;
+        for (int j=0;j<n;j++){
+            for (int i=0;i<m;i++){
+                if (rectangle[i][j].get_cell()==POINT)  fs1<<'.';
+                if (rectangle[i][j].get_cell()==WALL)   fs1<<'#';
+                if (rectangle[i][j].get_cell()==EMPTYNESS) fs1<<' ';
+                if (rectangle[i][j].get_object()==USER_SUMMONER)   fs1<<'@';
+                if (rectangle[i][j].get_object()==ENEMY_SUMMONER)   fs1<<'*';
+                if (rectangle[i][j].get_object()==USER_TROOP)   fs1<<'U';
+                if (rectangle[i][j].get_object()==ENEMY_TROOP)   fs1<<'E';
+            }
+            fs1<<endl;
+        }
+        fs1.close();
+    }
    
-    Summoner Landscape::create_summoner(string name, vector<pair<string,unsigned>> knowledge, const string fname){
+    void Landscape::create_summoner(Summoner& ss, string name, vector<pair<string,unsigned>> &knowledge, const string fname){
         Summoner S;
         unsigned initiative;
         unsigned health;
@@ -127,8 +164,58 @@ namespace  laba4{
             fst1>>knowledge[i].second;
             S.set_knowledge(knowledge[i]);
         }
-        return S;
+        ss=S;
     }
+    void Landscape:: fprint_Summoner(){
+        ofstream fst1("User_Summoner_Save");
+        if (!fst1.is_open()) throw runtime_error ("File can't open");
+        fst1<<User_Summoner.get_name();
+        fst1<<endl;
+        fst1<<User_Summoner.get_initiative();
+        fst1<<endl;
+        fst1<<User_Summoner.get_health();
+        fst1<<endl;
+        fst1<<User_Summoner.get_energy();
+        fst1<<endl;
+        fst1<<User_Summoner.get_experience();
+        fst1<<endl;
+        fst1<<User_Summoner.get_accumulation_coeficient();
+        fst1<<endl;
+        fst1<<User_Summoner.get_coordinates().x;
+        fst1<<' ';
+        fst1<<User_Summoner.get_coordinates().y;
+         fst1<<endl;
+        for (int i=0;i<User_Summoner.get_size_of_knowledge() ;i++){
+            fst1<<User_Summoner.get_knowledge(i).second;
+            fst1<<' ';
+        }
+        fst1.close();
+        ofstream fst2("Enemy_Summoner_Save");
+        if (!fst2.is_open()) throw runtime_error ("File can't open");
+        fst2<<Enemy_Summoner.get_name();
+        fst2<<endl;
+        fst2<<Enemy_Summoner.get_initiative();
+         fst2<<endl;
+        fst2<<Enemy_Summoner.get_health();
+         fst2<<endl;
+        fst2<<Enemy_Summoner.get_energy();
+        fst2<<endl;
+        fst2<<Enemy_Summoner.get_experience();
+        fst2<<endl;
+        fst2<<Enemy_Summoner.get_accumulation_coeficient();
+         fst2<<endl;
+        fst2<<Enemy_Summoner.get_coordinates().x;
+        fst2<<' ';
+        fst2<<Enemy_Summoner.get_coordinates().y;
+         fst2<<endl;
+        for (int i=0;i<Enemy_Summoner.get_size_of_knowledge() ;i++){
+         fst2<<' ';
+        fst2<<Enemy_Summoner.get_knowledge(i).second;
+            
+        }
+        fst2.close();
+    }
+    
     void Landscape:: read_school(){
           ifstream school("School");
         if (!school.is_open()) throw runtime_error("File can't open!");
@@ -151,8 +238,49 @@ namespace  laba4{
                 throw ex;
             }
         }
+        
         school.close();
     }
+    void Landscape:: fprint_school(){
+        ofstream school("School_Save");
+        if (!school.is_open()) throw runtime_error("File can't open!");
+        for (int i=0;i<tab_schools.size();i++){
+            school<<tab_schools[i].get_name();
+            school<<endl;
+            school<<tab_schools[i].get_school_dominant();
+             school<<endl;
+            school<<tab_schools[i].get_number_creatures();
+             school<<endl;
+            fprint_skill(tab_schools[i]);
+             school<<endl;
+        }
+        school.close();
+    }
+    void Landscape::fprint_skill(School & S){
+       const string name=S.get_name()+"_Save";
+        ofstream Sk(name);
+        if (!Sk.is_open()) throw runtime_error("File can't open!");
+        for (int i=0;i<S.get_size_of_data();i++){
+            Sk<<S.get_data(i).get_name();
+            Sk<<endl;
+            Sk<<S.get_data(i).get_energy();
+            Sk<<endl;
+            Sk<<S.get_data(i).get_min_knowledge();
+            Sk<<endl;
+            Sk<<S.get_data(i).get_coefficient();
+            Sk<<endl;
+            Sk<<S.get_data(i).get_creature().get_name();
+            Sk<<endl;
+            Sk<<S.get_data(i).get_creature().get_damage();
+            Sk<<endl;
+            Sk<<S.get_data(i).get_creature().get_protection();
+            Sk<<endl;
+            Sk<<S.get_data(i).get_creature().get_health();
+            Sk<<endl;
+        }
+        Sk.close();
+    }
+    
     void Landscape::read_skill(School & S){
         Skill skill;
         ifstream Sk(S.get_name());
@@ -316,4 +444,51 @@ namespace  laba4{
     }
         tr->move_troop();
         }
+    void Landscape:: print_summoner(){
+        cout<<"User_Summoner"<<endl;
+        cout<<User_Summoner<<endl;
+        cout<<"Enemy_Summoner"<<endl;
+        cout<<Enemy_Summoner<<endl;
     }
+    void Landscape:: print_school(){
+        for (int i=0;i<tab_schools.size();i++){
+            cout<<tab_schools[i]<<endl;
+        }
+    }
+    void Landscape::school_upgrade(Summoner &S, string a,int exp) {
+        if (exp> S.get_experience())
+            throw std::runtime_error("You don't have so much experience");
+        if(S.get_experience()==0)
+            throw std::runtime_error("No experience to upgrade");
+        else S.upschool(a, exp);
+}
+    void Landscape::energy_accumulation(Summoner & S) {
+        int enrg;
+        if (S.get_energy() == S.get_max_energy())
+            throw std::runtime_error("Energy is full");
+        if (S.get_energy() + 100*S.get_accumulation_coeficient() < S.get_max_energy()){
+            enrg=S.get_energy()+100*S.get_accumulation_coeficient();
+            S.set_energy(enrg);
+        }
+        
+        else
+            S.set_energy(S.get_max_energy());
+        S.set_accumulation_coeficient(S.get_accumulation_coeficient() * 2);
+    }
+    void Landscape:: choose_skill(School *sch, Skill &sk,Summoner& S){
+        for (int i=0;i<S.get_size_of_knowledge();i++){
+            if (S.get_knowledge(i).first==sch->get_name()){
+                for(int i=0;i<sch->get_size_of_data();i++){
+                    cout<<i+1<<"."<<sch->get_data(i).get_name()<<endl;
+                }
+                int k;
+                cin>>k;
+                if (sch->get_data(k-1).get_min_knowledge()<=S.get_knowledge(i).second)
+                    sk=sch->get_data(k-1);
+                else throw runtime_error("You don't have enough knowledge for summon this creature");
+                    }
+                }
+        }
+    
+    
+}

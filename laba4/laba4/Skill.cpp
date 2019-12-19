@@ -31,10 +31,10 @@ namespace laba4{
     }
     ostream& operator <<(ostream& s, const Skill &sk){
         cout<<"Skill name: "<<sk.name<<endl;
-        cout<<"Skill energy"<<sk.energy<<endl;
-        cout<<"Skill min knowledge"<<sk.min_knowledge<<endl;
-        cout<<"Skill coefficient"<<sk.coefficient<<endl;
-        cout<<"Skill creature"<<sk.creature<<endl;
+        cout<<"Skill energy: "<<sk.energy<<endl;
+        cout<<"Skill min knowledge: "<<sk.min_knowledge<<endl;
+        cout<<"Skill coefficient; "<<sk.coefficient<<endl;
+        cout<<"Skill creature: "<<sk.creature<<endl;
         return s;
     }
     Skill& Skill:: operator=(const Skill &sk){

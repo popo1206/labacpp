@@ -55,7 +55,7 @@ namespace laba4{
         cout<<"Energy: "<<a.energy<<endl;
         cout<<"Experience: "<<a.experience<<endl;
         cout<<"Accumulation coefficient: "<<a.accumulation_coeficient<<endl;
-        cout<<"School  knowledge"<<endl;
+        cout<<"School  knowledge: "<<endl;
         for(int i=0;i<a.knowledge.size();i++){
             cout<<a.knowledge[i].first<<" "<<a.knowledge[i].second<<endl;
         }
@@ -108,13 +108,9 @@ namespace laba4{
     
    void Summoner::summon(Immoral_Troop *tr) {//передается собранный отряд со значения школ криче и тд
        troops.push_back(tr);
+       //tr=nullptr;
    }
-    /*void Summoner::change_initiative(){
-        for (int i=0;i<troops.size();i++){
-                troops[i]->set_initiative(!troops[i]->get_initiative());
-        }
-        
-    }*/
+    
     
     
 }

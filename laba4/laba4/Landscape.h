@@ -37,8 +37,8 @@ namespace laba4 {
         
         friend ostream&  operator << (ostream& s, const Cell &a){
             if (a.cell==POINT)  cout<<'.';
-            if (a.cell==EMPTYNESS)  cout<<' ';
             if (a.cell==WALL)  cout<<'#';
+            if (a.cell==EMPTYNESS) cout<<' ';
             if (a.object==USER_SUMMONER)  cout<<'@';
             if (a.object==ENEMY_SUMMONER)  cout<<'*';
             if (a.object==USER_TROOP)  cout<<'U';
@@ -97,7 +97,7 @@ namespace laba4 {
         friend ostream& operator <<(ostream& s, const  Landscape &a);
         void generation_map(int,int,int,int);
         void input_map();
-        Summoner create_summoner(string,vector<pair<string,unsigned>>,const string);
+        void create_summoner(Summoner&, string,vector<pair<string,unsigned>>&,const string);
         void read_school();
         void read_skill(School&);
         School* find_school(string);
@@ -106,7 +106,15 @@ namespace laba4 {
         Object& move_queue(Try_To_Be_Smart::Priorety_Queue<Object,unsigned>& qq);
         void print_map();
         void move_troop(char ch,Immoral_Troop*);
-         // void fprint();
+        void print_summoner();
+        void print_school();
+        void fprint_school();
+        void fprint_skill(School&);
+        void fprint_map();
+        void fprint_Summoner();
+        void school_upgrade(Summoner&,string,int);
+        void energy_accumulation(Summoner &);
+        void choose_skill(School*,Skill &sk,Summoner &);
        
     };
 }

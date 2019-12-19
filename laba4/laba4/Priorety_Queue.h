@@ -11,6 +11,7 @@
 #include <vector>
 #include <iostream>
 #include <iterator>
+#include <utility>
 using namespace std;
 namespace Try_To_Be_Smart {
     template <class type_elem,class type_priority>
@@ -19,7 +20,8 @@ namespace Try_To_Be_Smart {
         pair<type_elem,type_priority> *cur;
     public:
         Priority_QueueIt() : cur(0) {}
-        Priority_QueueIt(pair<type_elem,type_priority> *n) : cur(n) {}
+        Priority_QueueIt(pair<type_elem,type_priority> cur) {this->cur=&cur;}
+        Priority_QueueIt(pair<type_elem,type_priority> *cur){this->cur=cur;}
         bool operator!=(const Priority_QueueIt& cur) const{
             return this->cur!=cur;
         }
@@ -32,9 +34,9 @@ namespace Try_To_Be_Smart {
         pair<type_elem,type_priority>* operator ->(){
             return cur;
         }
-        Priority_QueueIt<type_elem,type_priority>& operator++(){
-            ++cur;
-            return *this;
+         pair<type_elem,type_priority>& operator++(){
+           
+            return  *++cur;;
         }
     };
 
@@ -58,11 +60,9 @@ public:
         timeline.clear();
     }
     typedef Priority_QueueIt<type_elem,type_priority> Iterator;
-    Iterator begin() const { return elem.begin();}
-    Iterator end()const { return elem.end();}
-    Iterator find(int i) {
-        return Iterator(this->begin()+i);
-    }
+    Iterator begin() const {return Iterator(elem[0]);}
+    Iterator end()const {return Iterator(elem[size()-1]);}
+                                                                                        
     Priorety_Queue& operator=(const Priorety_Queue& _Q){
         for (int i=0;i<_Q.size();i++){
             elem.push_back(_Q.elem[i]);
@@ -84,6 +84,8 @@ public:
         value.first=value1;
         value.second=priority;
         int pos=0;
+        for (int i=0;i<timeline.size();i++)
+            timeline[i]--;
         if (!elem.empty()){
             while (pos<elem.size()){
                 if (elem[pos].second<priority) break;
@@ -91,8 +93,9 @@ public:
             }
             if ((timeline[pos]==0)&&(pos<elem.size())) pos++;
         }
-       elem.insert(elem.begin(), value);
-       //timeline.insert(timeline[pos],4);
+       elem.insert(elem.begin()+pos, value);
+      timeline.insert(timeline.begin()+pos, 4);
+        
         
     }
     void pop(){
@@ -100,6 +103,10 @@ public:
         vector<pair<type_elem,type_priority>>(elem).swap(elem);
         timeline.erase(timeline.begin());
         vector<unsigned>(timeline).swap(timeline);
+    }
+    void  erase_queue(int i) {
+        elem.erase(elem.cbegin()+i);
+        timeline.erase(timeline.cbegin()+i);
     }
 };
    
