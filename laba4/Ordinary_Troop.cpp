@@ -74,5 +74,18 @@ namespace   laba4{
         if (ch=='A') ((p.x-1)>0) ? p.x--:p.x=0;*/
         balance_moral();
     }
+    ostream&  Ordinary_Troop:: print(ostream& s) const{
+        cout<<"Speed:"<< speed<<endl;
+        cout<<"Moral: "<<moral<<endl;
+        cout<<"initiative: "<<initiative<<endl;
+        cout<<"damage: "<<damage<<endl;
+        cout<<"protection: "<<protection<<endl;
+        cout<<"experience: "<<experience<<endl;
+        cout<<"count: "<<count<<endl;
+        cout<<"health: "<<health<<endl;
+        cout<<"Creature: "<<creature.get_name()<<endl;
+        cout<<"School: "<<ptr_school->get_name();
+        return s;
+    }
     
 }

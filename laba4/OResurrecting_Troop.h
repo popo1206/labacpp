@@ -31,6 +31,7 @@ namespace laba4 {
         //methods
         OResurrecting_Troop& operator=(const OResurrecting_Troop&);
        void resurrect_creatures();
+        virtual ostream& print(ostream& s) const;
     };
 }
 

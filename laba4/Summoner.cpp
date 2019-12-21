@@ -59,8 +59,9 @@ namespace laba4{
         for(int i=0;i<a.knowledge.size();i++){
             cout<<a.knowledge[i].first<<" "<<a.knowledge[i].second<<endl;
         }
+        cout<<endl;
        for(int i=0;i<a.troops.size();i++){
-            cout<<a.troops[i]<<endl;
+           cout<<"Troop: "<<(*a.troops[i])<<endl;
         }
         return s;
     }

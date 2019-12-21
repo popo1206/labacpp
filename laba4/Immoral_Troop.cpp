@@ -65,6 +65,24 @@ namespace laba4 {
             
         }
     }
+    ostream& operator <<(ostream& s,const Immoral_Troop& a){
+        
+        return a.print(s);
+    }
+    ostream&  Immoral_Troop:: print(ostream&s) const{
+        cout<<"Speed:"<<speed<<endl;
+        cout<<"initiative: "<<initiative<<endl;
+        cout<<"damage: "<<damage<<endl;
+        cout<<"protection: "<<protection<<endl;
+        cout<<"experience: "<<experience<<endl;
+        cout<<"count: "<<count<<endl;
+        cout<<"health: "<<health<<endl;
+        cout<<"Creature: "<<creature.get_name()<<endl;
+        cout<<"School: "<<ptr_school->get_name();
+        return s;
+    }
+    
+    
     void Immoral_Troop:: move_troop(/*const char ch,int m,int n*/){//провекра на клетку и коо-во доступных ходов в области
         /*
         if (ch=='W') ((p.y+1)<m-1) ? p.y++: p.y=m-1;

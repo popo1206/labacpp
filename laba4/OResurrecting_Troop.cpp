@@ -7,9 +7,9 @@
 //
 
 #include <stdio.h>
-#include "IResurrecting_Troop.h"
+#include "OResurrecting_Troop.h"
 namespace   laba4{
-    IResurrecting_Troop& IResurrecting_Troop:: operator=(const IResurrecting_Troop& O_Troop){
+    OResurrecting_Troop& OResurrecting_Troop:: operator=(const OResurrecting_Troop& O_Troop){
         damage=O_Troop.get_damage();
         speed=O_Troop.get_speed();
         initiative=O_Troop.get_initiative();
@@ -20,14 +20,14 @@ namespace   laba4{
         creature=O_Troop.get_creature();
         p=O_Troop.get_p();
         ptr_school=O_Troop.get_ptr_school();
-        dead_creatures=O_Troop.get_dead_creatures();
         return *this;
     }
-   IResurrecting_Troop::IResurrecting_Troop(const IResurrecting_Troop& O_Troop)
+    OResurrecting_Troop::OResurrecting_Troop(const OResurrecting_Troop& O_Troop)
     {
         dead_creatures=O_Troop.get_dead_creatures();
         damage=O_Troop.get_damage();
         speed=O_Troop.get_speed();
+        moral=O_Troop.get_moral();
         initiative=O_Troop.get_initiative();
         protection=O_Troop.get_protection();
         experience=O_Troop.get_experience();
@@ -37,7 +37,7 @@ namespace   laba4{
         p=O_Troop.get_p();
         ptr_school=O_Troop.get_ptr_school();
     }
-    void IResurrecting_Troop:: resurrect_creatures(){
+    void OResurrecting_Troop:: resurrect_creatures(){
         if (dead_creatures > 0) {
             if (dead_creatures >= 3) {
                 count += 3;
@@ -50,6 +50,20 @@ namespace   laba4{
                 dead_creatures =0;
             }
         }
+    }
+    ostream&  OResurrecting_Troop:: print(ostream& s) const{
+        cout<<"Speed:"<< speed<<endl;
+        cout<<"Dead creatures:"<<dead_creatures<<endl;
+        cout<<"Moral: "<<moral<<endl;
+        cout<<"initiative: "<<initiative<<endl;
+        cout<<"damage: "<<damage<<endl;
+        cout<<"protection: "<<protection<<endl;
+        cout<<"experience: "<<experience<<endl;
+        cout<<"count: "<<count<<endl;
+        cout<<"health: "<<health<<endl;
+        cout<<"Creature: "<<creature.get_name()<<endl;
+        cout<<"School: "<<ptr_school->get_name();
+        return s;
     }
     
 }

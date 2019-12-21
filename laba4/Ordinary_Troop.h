@@ -33,6 +33,7 @@ public:
     void attack(Ordinary_Troop&);
     void take_damage(Ordinary_Troop&);
    void move_troop(/*const char ch,int,int*/);
+    virtual ostream&  print(ostream& s) const;
 };
 }
 #endif /* Ordinary_Troop_h */

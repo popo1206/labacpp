@@ -64,6 +64,8 @@ namespace laba4{
       virtual ~Immoral_Troop(){}
         //methods
        virtual Immoral_Troop& operator =(const Immoral_Troop&);
+       virtual ostream& print(ostream&s) const;
+      friend ostream& operator <<(ostream& s,const Immoral_Troop&);
         virtual void attack(Immoral_Troop&);
         virtual void take_damage(Immoral_Troop&);
       virtual void move_troop(/*const char ch,int,int*/);

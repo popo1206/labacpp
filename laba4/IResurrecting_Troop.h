@@ -29,6 +29,7 @@ namespace laba4 {
         }
         IResurrecting_Troop(const IResurrecting_Troop&);//copying
         IResurrecting_Troop& operator=(const IResurrecting_Troop&);
+         virtual ostream& print(ostream& s) const;
        void resurrect_creatures();
     };
 }
