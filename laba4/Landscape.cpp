@@ -87,10 +87,6 @@ namespace  laba4{
             rectangle[i][j].set_cell(EMPTYNESS);
              emptyness--;
          }
-        /*rectangle[User_Summoner.get_coordinates().x][User_Summoner.get_coordinates().y].set_cell(EMPTY_CELL);
-        rectangle[User_Summoner.get_coordinates().x][User_Summoner.get_coordinates().y].set_object(USER_SUMMONER);
-        rectangle[Enemy_Summoner.get_coordinates().x][Enemy_Summoner.get_coordinates().y].set_cell(EMPTY_CELL);
-        rectangle[Enemy_Summoner.get_coordinates().x][Enemy_Summoner.get_coordinates().y].set_object(ENEMY_SUMMONER);*/
     }
     void Landscape:: input_map(){
         ifstream fs1("input_map");
@@ -109,10 +105,6 @@ namespace  laba4{
             rectangle.push_back(p);
         }
         fs1.close();
-       /* rectangle[User_Summoner.get_coordinates().y][User_Summoner.get_coordinates().x].set_cell(EMPTY_CELL);
-        rectangle[User_Summoner.get_coordinates().y][User_Summoner.get_coordinates().x].set_object(USER_SUMMONER);
-        rectangle[Enemy_Summoner.get_coordinates().y][Enemy_Summoner.get_coordinates().x].set_cell(EMPTY_CELL);
-        rectangle[Enemy_Summoner.get_coordinates().y][Enemy_Summoner.get_coordinates().x].set_object(ENEMY_SUMMONER);*/
     }
     void Landscape:: fprint_map(){
         ofstream fs1("input_map_save");
@@ -159,6 +151,7 @@ namespace  laba4{
         S.set_accumulation_coeficient(accumulation_coeficient);
         fst1>>p0.x;
         fst1>>p0.y;
+      
         S.set_coordinates(p0);
         for (int i=0;i<knowledge.size();i++){
             fst1>>knowledge[i].second;
@@ -325,34 +318,55 @@ namespace  laba4{
         return nullptr;
     }
    
-    void Landscape:: install_troop_in_cell(){
+    void Landscape:: install_troop_in_cell(Summoner *s){
         Coordinates p(0,0);
-        p=User_Summoner.get_coordinates();
-        unsigned long k=User_Summoner.get_size_of_troops();
+        p=s->get_coordinates();
+        unsigned long k=s->get_size_of_troops();
+        if (((p.x+1)<m)&&((p.y+1)<n)) {
         if (rectangle[p.x+1][p.y+1].get_object()==EMPTY_OBJECT){
-                rectangle[p.x+1][p.y+1].set_object(USER_TROOP);
+            rectangle[p.x+1][p.y+1].set_cell(EMPTY_CELL);
+                if (s->get_name()==User_Summoner.get_name()) rectangle[p.x+1][p.y+1].set_object(USER_TROOP);
+             if (s->get_name()==Enemy_Summoner.get_name()) rectangle[p.x+1][p.y+1].set_object(ENEMY_TROOP);
                 Coordinates pp(p.x+1,p.y+1);
-                User_Summoner.get_troops(k-1)->set_p(pp);
+                s->get_troops(k-1)->set_p(pp);
+            return;
         }
+        }
+        if ((p.y+1)<n)
         if (rectangle[p.x][p.y+1].get_object()==EMPTY_OBJECT){
-                rectangle[p.x][p.y+1].set_object(USER_TROOP);
+             rectangle[p.x][p.y+1].set_cell(EMPTY_CELL);
+            if (s->get_name()==User_Summoner.get_name()) rectangle[p.x][p.y+1].set_object(USER_TROOP);
+            if (s->get_name()==Enemy_Summoner.get_name()) rectangle[p.x][p.y+1].set_object(ENEMY_TROOP);
                 Coordinates pp(p.x,p.y+1);
-                User_Summoner.get_troops(k-1)->set_p(pp);
+                s->get_troops(k-1)->set_p(pp);
+            return;
         }
+        if ((p.y-1)>=0)
         if (rectangle[p.x][p.y-1].get_object()==EMPTY_OBJECT){
-                rectangle[p.x][p.y-1].set_object(USER_TROOP);
+             rectangle[p.x][p.y-1].set_cell(EMPTY_CELL);
+            if (s->get_name()==User_Summoner.get_name()) rectangle[p.x][p.y-1].set_object(USER_TROOP);
+            if (s->get_name()==Enemy_Summoner.get_name()) rectangle[p.x][p.y-1].set_object(ENEMY_TROOP);
                 Coordinates pp(p.x,p.y-1);
-                User_Summoner.get_troops(k-1)->set_p(pp);
+                s->get_troops(k-1)->set_p(pp);
+            return;
         }
+        if ((p.x+1)<m)
         if (rectangle[p.x+1][p.y].get_object()==EMPTY_OBJECT){
-                rectangle[p.x+1][p.y].set_object(USER_TROOP);
+             rectangle[p.x+1][p.y].set_cell(EMPTY_CELL);
+            if (s->get_name()==User_Summoner.get_name()) rectangle[p.x+1][p.y].set_object(USER_TROOP);
+            if (s->get_name()==Enemy_Summoner.get_name()) rectangle[p.x+1][p.y].set_object(ENEMY_TROOP);
                 Coordinates pp(p.x+1,p.y);
-                User_Summoner.get_troops(k-1)->set_p(pp);
+                s->get_troops(k-1)->set_p(pp);
+            return;
         }
+        if ((p.x-1)>=0)
         if (rectangle[p.x-1][p.y].get_object()==EMPTY_OBJECT){
-                rectangle[p.x-1][p.y].set_object(USER_TROOP);
+             rectangle[p.x-1][p.y].set_cell(EMPTY_CELL);
+            if (s->get_name()==User_Summoner.get_name()) rectangle[p.x-1][p.y].set_object(USER_TROOP);
+            if (s->get_name()==Enemy_Summoner.get_name()) rectangle[p.x-1][p.y].set_object(ENEMY_TROOP);
                 Coordinates pp(p.x-1,p.y);
-                User_Summoner.get_troops(k-1)->set_p(pp);
+                s->get_troops(k-1)->set_p(pp);
+            return;
         }
     }
     void Landscape:: push_queue(Summoner* s,Immoral_Troop* tr, Try_To_Be_Smart::Priorety_Queue<Object,unsigned>& qq){
@@ -379,71 +393,72 @@ namespace  laba4{
         }
     }
 
-    void Landscape::move_troop(char ch,Immoral_Troop *tr){
-         int k=User_Summoner.get_size_of_troops();
-        if (ch=='W'){
-                if ((tr->get_p().y+1)<=m-1){
+    int Landscape::move_troop(char ch,Immoral_Troop *tr){
+        if (ch=='s'){//поменял букву
+            if ((tr->get_p().y+1)<=m-1){
                 if ((rectangle[tr->get_p().y+1][tr->get_p().x].get_cell()==POINT)&&(rectangle[tr->get_p().y+1][tr->get_p().x].get_object()==EMPTY_OBJECT)){
-                        Coordinates p;
-                        p.x=tr->get_p().x;
-                        p.y=tr->get_p().y+1;
-                        rectangle[tr->get_p().y][tr->get_p().x].set_object(EMPTY_OBJECT);
-                        rectangle[tr->get_p().y][tr->get_p().x].set_cell(POINT);
-                        rectangle[tr->get_p().y+1][tr->get_p().x].set_cell(EMPTY_CELL);
-                        rectangle[tr->get_p().y+1][tr->get_p().x].set_object(USER_TROOP);
-                        tr->set_p(p);
-            }
+                    Coordinates p;
+                    p.x=tr->get_p().x;
+                    p.y=tr->get_p().y+1;
+                    rectangle[tr->get_p().y + 1][tr->get_p().x].set_cell(EMPTY_CELL);
+                    rectangle[tr->get_p().y + 1][tr->get_p().x].set_object(rectangle[tr->get_p().y][tr->get_p().x].get_object());//поменял присвоение объекта с user troop на объект который стоял в начальной клетке
+                    rectangle[tr->get_p().y][tr->get_p().x].set_object(EMPTY_OBJECT);
+                    rectangle[tr->get_p().y][tr->get_p().x].set_cell(POINT);
+                    
+                    tr->set_p(p);
+                }
                 else throw runtime_error("There is a barrier.");
             }
             else throw runtime_error("Can't move there.End of map");
         }
-        if (ch=='D'){
+        if (ch=='d'){//поменял букву
             if ((tr->get_p().x+1)<=n-1){
                 if ((rectangle[tr->get_p().y][tr->get_p().x+1].get_cell()==POINT)&&(rectangle[tr->get_p().y][tr->get_p().x+1].get_object()==EMPTY_OBJECT)){
-                        Coordinates p;
-                        p.x=tr->get_p().x+1;
-                        p.y=tr->get_p().y;
-                        rectangle[tr->get_p().y][tr->get_p().x+1].set_object(USER_TROOP);
-                        rectangle[tr->get_p().y][tr->get_p().x].set_object(EMPTY_OBJECT);
-                        rectangle[tr->get_p().y][tr->get_p().x].set_cell(POINT);
-                        rectangle[tr->get_p().y][tr->get_p().x+1].set_cell(EMPTY_CELL);
-                        tr->set_p(p);
+                    Coordinates p;
+                    p.x=tr->get_p().x+1;
+                    p.y=tr->get_p().y;
+                    rectangle[tr->get_p().y][tr->get_p().x+1].set_object(rectangle[tr->get_p().y][tr->get_p().x].get_object()); //поменял присвоение объекта с user troop на объект который стоял в начальной клетке
+                    rectangle[tr->get_p().y][tr->get_p().x].set_object(EMPTY_OBJECT);
+                    rectangle[tr->get_p().y][tr->get_p().x].set_cell(POINT);
+                    rectangle[tr->get_p().y][tr->get_p().x+1].set_cell(EMPTY_CELL);
+                    tr->set_p(p);
                 } else throw runtime_error("There is a barrier.");
             }
             else throw runtime_error("Can't move there.End of map");
         }
-        if (ch=='S'){
+        if (ch=='w'){//поменял букву
             if ((tr->get_p().y-1)>=0){
                 if ((rectangle[tr->get_p().y-1][tr->get_p().x].get_cell()==POINT)&&(rectangle[tr->get_p().y-1][tr->get_p().x].get_object()==EMPTY_OBJECT)){
-                        Coordinates p;
-                        p.x=tr->get_p().x;
-                        p.y=tr->get_p().y-1;
-                        rectangle[tr->get_p().y-1][tr->get_p().x].set_object(USER_TROOP);
-                        rectangle[tr->get_p().y][tr->get_p().x].set_object(EMPTY_OBJECT);
-                        rectangle[tr->get_p().y][tr->get_p().x].set_cell(POINT);
-                        rectangle[tr->get_p().y-1][tr->get_p().x].set_cell(EMPTY_CELL);
-                        tr->set_p(p);
+                    Coordinates p;
+                    p.x=tr->get_p().x;
+                    p.y=tr->get_p().y-1;
+                    rectangle[tr->get_p().y-1][tr->get_p().x].set_object(rectangle[tr->get_p().y][tr->get_p().x].get_object()); //поменял присвоение объекта с user troop на объект который стоял в начальной клетке
+                    rectangle[tr->get_p().y][tr->get_p().x].set_object(EMPTY_OBJECT);
+                    rectangle[tr->get_p().y][tr->get_p().x].set_cell(POINT);
+                    rectangle[tr->get_p().y-1][tr->get_p().x].set_cell(EMPTY_CELL);
+                    tr->set_p(p);
                 } else throw runtime_error("There is a barrier.");
             }
             else throw runtime_error("Can't move there.End of map");
         }
-        if (ch=='A'){
+        if (ch=='a'){//поменял букву
             if ((tr->get_p().x-1)>0){
-                 if ((rectangle[tr->get_p().y][tr->get_p().x-1].get_cell()==POINT)&&(rectangle[tr->get_p().y][tr->get_p().x-1].get_object()==EMPTY_OBJECT)){
-                        Coordinates p;
-                        p.x=tr->get_p().x-1;
-                        p.y=tr->get_p().y;
-                        rectangle[tr->get_p().y][tr->get_p().x-1].set_object(USER_TROOP);
-                        rectangle[tr->get_p().y][tr->get_p().x].set_object(EMPTY_OBJECT);
-                        rectangle[tr->get_p().y][tr->get_p().x].set_cell(POINT);
-                        rectangle[tr->get_p().y][tr->get_p().x-1].set_cell(EMPTY_CELL);
-                        tr->set_p(p);
-                 }  else throw runtime_error("There is a barrier.");
+                if ((rectangle[tr->get_p().y][tr->get_p().x-1].get_cell()==POINT)&&(rectangle[tr->get_p().y][tr->get_p().x-1].get_object()==EMPTY_OBJECT)){
+                    Coordinates p;
+                    p.x=tr->get_p().x-1;
+                    p.y=tr->get_p().y;
+                    rectangle[tr->get_p().y][tr->get_p().x-1].set_object(rectangle[tr->get_p().y][tr->get_p().x].get_object());//поменял присвоение объекта с user troop на объект который стоял в начальной клетке
+                    rectangle[tr->get_p().y][tr->get_p().x].set_object(EMPTY_OBJECT);
+                    rectangle[tr->get_p().y][tr->get_p().x].set_cell(POINT);
+                    rectangle[tr->get_p().y][tr->get_p().x-1].set_cell(EMPTY_CELL);
+                    tr->set_p(p);
+                }  else throw runtime_error("There is a barrier.");
             }
             else throw runtime_error("Can't move there.End of map");
-    }
-        tr->move_troop();
         }
+        tr->move_troop();
+        return 1;
+    }
     void Landscape:: print_summoner(){
         cout<<"User_Summoner"<<endl;
         cout<<User_Summoner<<endl;

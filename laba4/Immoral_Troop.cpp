@@ -62,6 +62,10 @@ namespace laba4 {
             health=taking_damage;
 
             count=(health+creature.get_health()-1)/creature.get_health();
+            if (health % creature.get_health() == 0)
+                count = health / creature.get_health();
+            else
+                count = health / creature.get_health()+1;
             
         }
     }
