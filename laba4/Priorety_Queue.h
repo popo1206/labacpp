@@ -83,17 +83,15 @@ public:
         int pos=0;
         if (!elem.empty()){
             while (pos<elem.size()){
-                if ((timeline[pos]>priority)||((pos+1)==elem.size())) break;
+                if (timeline[pos]>priority) break;
                 pos++;
             }
-            while (elem[pos].second==priority) pos++;
         }
        elem.insert(elem.begin()+pos, value);
         if (elem[pos].first.Summoner!=nullptr)
             timeline.insert(timeline.begin()+pos, elem[pos].first.Summoner->get_initiative());
         if (elem[pos].first.Troop!=nullptr)
             timeline.insert(timeline.begin()+pos, elem[pos].first.Troop->get_initiative());
-        
     }
     void pop(){
         for (int i=0;i<elem.size();i++){
@@ -110,12 +108,12 @@ public:
     }
     void show(){
         for (int i=0;i<elem.size();i++){
-            if (elem[i].first.Summoner!=nullptr) {
+            if (elem[i].first.Troop==nullptr) {
                 cout<<"Summoner: "<<elem[i].first.Summoner->get_name()<<". Initiative: "<<timeline[i];
                 cout<<endl;
             }
             if (elem[i].first.Troop!=nullptr) {
-                cout<<"Troop: "<<elem[i].first.Troop->get_creature().get_name()<<". Initiative: "<<timeline[i];
+                cout<<"Sum: "<<elem[i].first.Summoner->get_name()<<" his "<<typeid(*elem[i].first.Troop).name() <<" : "<<elem[i].first.Troop->get_creature().get_name()<<". Initiative: "<<timeline[i];
                 cout<<endl;
             }
         }

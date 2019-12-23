@@ -98,7 +98,7 @@ namespace laba4 {
          //functions
         friend ostream& operator <<(ostream& s, const  Landscape &a);
         void generation_map(int,int,int,int);
-        void input_map();
+        void input_map(const string fname);
         void create_summoner(Summoner&, string,vector<pair<string,unsigned>>&,const string);
         void read_school();
         void read_skill(School&);

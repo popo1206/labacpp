@@ -88,8 +88,8 @@ namespace  laba4{
              emptyness--;
          }
     }
-    void Landscape:: input_map(){
-        ifstream fs1("input_map");
+    void Landscape:: input_map(const string fname){
+        ifstream fs1(fname);
         if (!fs1.is_open()) throw  runtime_error("File can't open!");
         char ch;
         fs1>>n;
@@ -159,7 +159,7 @@ namespace  laba4{
         }
         ss=S;
     }
-    void Landscape:: fprint_Summoner(){
+   /* void Landscape:: fprint_Summoner(){
         ofstream fst1("User_Summoner_Save");
         if (!fst1.is_open()) throw runtime_error ("File can't open");
         fst1<<User_Summoner.get_name();
@@ -181,6 +181,33 @@ namespace  laba4{
         for (int i=0;i<User_Summoner.get_size_of_knowledge() ;i++){
             fst1<<User_Summoner.get_knowledge(i).second;
             fst1<<' ';
+            for (int i=0;i<User_Summoner.get_size_of_troops();i++){
+                fst1<<typeid(*User_Summoner.get_troops(i)).name();
+                fst1<<' ';
+                fst1<<User_Summoner.get_troops(i)->get_count();
+                fst1<<' ';
+                fst1<<User_Summoner.get_troops(i)->get_speed();
+                fst1<<' ';
+                fst1<<User_Summoner.get_troops(i)->get_protection();
+                fst1<<' ';
+                fst1<<User_Summoner.get_troops(i)->get_p().x;
+                fst1<<' ';
+                fst1<<User_Summoner.get_troops(i)->get_p().y;
+                fst1<<' ';
+                fst1<<User_Summoner.get_troops(i)->get_damage();
+                fst1<<' ';
+                fst1<<User_Summoner.get_troops(i)->get_health();
+                fst1<<' ';
+                fst1<<User_Summoner.get_troops(i)->get_creature().get_name();
+                fst1<<' ';
+                fst1<<User_Summoner.get_troops(i)->get_creature().get_health();
+                fst1<<' ';
+                fst1<<User_Summoner.get_troops(i)->get_creature().get_damage();
+                fst1<<' ';
+                fst1<<User_Summoner.get_troops(i)->get_creature().get_protection();
+                fst1<<' ';
+                fst1<<User_Summoner.get_troops(i)->get_ptr_school()->get_name();
+            }
         }
         fst1.close();
         ofstream fst2("Enemy_Summoner_Save");
@@ -208,7 +235,7 @@ namespace  laba4{
         }
         fst2.close();
     }
-    
+    */
     void Landscape:: read_school(){
           ifstream school("School");
         if (!school.is_open()) throw runtime_error("File can't open!");
@@ -323,48 +350,48 @@ namespace  laba4{
         p=s->get_coordinates();
         unsigned long k=s->get_size_of_troops();
         if (((p.x+1)<m)&&((p.y+1)<n)) {
-        if (rectangle[p.x+1][p.y+1].get_object()==EMPTY_OBJECT){
-            rectangle[p.x+1][p.y+1].set_cell(EMPTY_CELL);
-                if (s->get_name()==User_Summoner.get_name()) rectangle[p.x+1][p.y+1].set_object(USER_TROOP);
-             if (s->get_name()==Enemy_Summoner.get_name()) rectangle[p.x+1][p.y+1].set_object(ENEMY_TROOP);
-                Coordinates pp(p.x+1,p.y+1);
+        if (rectangle[p.y+1][p.x+1].get_object()==EMPTY_OBJECT){
+            rectangle[p.y+1][p.x+1].set_cell(EMPTY_CELL);
+                if (s->get_name()==User_Summoner.get_name()) rectangle[p.y+1][p.x+1].set_object(USER_TROOP);
+             if (s->get_name()==Enemy_Summoner.get_name()) rectangle[p.y+1][p.x+1].set_object(ENEMY_TROOP);
+                Coordinates pp(p.y+1,p.x+1);
                 s->get_troops(k-1)->set_p(pp);
             return;
         }
         }
         if ((p.y+1)<n)
-        if (rectangle[p.x][p.y+1].get_object()==EMPTY_OBJECT){
-             rectangle[p.x][p.y+1].set_cell(EMPTY_CELL);
-            if (s->get_name()==User_Summoner.get_name()) rectangle[p.x][p.y+1].set_object(USER_TROOP);
-            if (s->get_name()==Enemy_Summoner.get_name()) rectangle[p.x][p.y+1].set_object(ENEMY_TROOP);
-                Coordinates pp(p.x,p.y+1);
+        if (rectangle[p.y+1][p.x].get_object()==EMPTY_OBJECT){
+             rectangle[p.y+1][p.x].set_cell(EMPTY_CELL);
+            if (s->get_name()==User_Summoner.get_name()) rectangle[p.y+1][p.x].set_object(USER_TROOP);
+            if (s->get_name()==Enemy_Summoner.get_name()) rectangle[p.y+1][p.x].set_object(ENEMY_TROOP);
+                Coordinates pp(p.y+1,p.x);
                 s->get_troops(k-1)->set_p(pp);
             return;
         }
         if ((p.y-1)>=0)
-        if (rectangle[p.x][p.y-1].get_object()==EMPTY_OBJECT){
-             rectangle[p.x][p.y-1].set_cell(EMPTY_CELL);
-            if (s->get_name()==User_Summoner.get_name()) rectangle[p.x][p.y-1].set_object(USER_TROOP);
-            if (s->get_name()==Enemy_Summoner.get_name()) rectangle[p.x][p.y-1].set_object(ENEMY_TROOP);
-                Coordinates pp(p.x,p.y-1);
+        if (rectangle[p.y-1][p.x].get_object()==EMPTY_OBJECT){
+             rectangle[p.y-1][p.x].set_cell(EMPTY_CELL);
+            if (s->get_name()==User_Summoner.get_name()) rectangle[p.y-1][p.x].set_object(USER_TROOP);
+            if (s->get_name()==Enemy_Summoner.get_name()) rectangle[p.y-1][p.x].set_object(ENEMY_TROOP);
+                Coordinates pp(p.y-1,p.x);
                 s->get_troops(k-1)->set_p(pp);
             return;
         }
         if ((p.x+1)<m)
-        if (rectangle[p.x+1][p.y].get_object()==EMPTY_OBJECT){
-             rectangle[p.x+1][p.y].set_cell(EMPTY_CELL);
-            if (s->get_name()==User_Summoner.get_name()) rectangle[p.x+1][p.y].set_object(USER_TROOP);
-            if (s->get_name()==Enemy_Summoner.get_name()) rectangle[p.x+1][p.y].set_object(ENEMY_TROOP);
-                Coordinates pp(p.x+1,p.y);
+        if (rectangle[p.y][p.x+1].get_object()==EMPTY_OBJECT){
+             rectangle[p.y][p.x+1].set_cell(EMPTY_CELL);
+            if (s->get_name()==User_Summoner.get_name()) rectangle[p.y][p.x+1].set_object(USER_TROOP);
+            if (s->get_name()==Enemy_Summoner.get_name()) rectangle[p.y][p.x+1].set_object(ENEMY_TROOP);
+                Coordinates pp(p.y,p.x+1);
                 s->get_troops(k-1)->set_p(pp);
             return;
         }
         if ((p.x-1)>=0)
-        if (rectangle[p.x-1][p.y].get_object()==EMPTY_OBJECT){
-             rectangle[p.x-1][p.y].set_cell(EMPTY_CELL);
-            if (s->get_name()==User_Summoner.get_name()) rectangle[p.x-1][p.y].set_object(USER_TROOP);
-            if (s->get_name()==Enemy_Summoner.get_name()) rectangle[p.x-1][p.y].set_object(ENEMY_TROOP);
-                Coordinates pp(p.x-1,p.y);
+        if (rectangle[p.y][p.x-1].get_object()==EMPTY_OBJECT){
+             rectangle[p.y][p.x-1].set_cell(EMPTY_CELL);
+            if (s->get_name()==User_Summoner.get_name()) rectangle[p.y][p.x-1].set_object(USER_TROOP);
+            if (s->get_name()==Enemy_Summoner.get_name()) rectangle[p.y][p.x-1].set_object(ENEMY_TROOP);
+                Coordinates pp(p.y,p.x-1);
                 s->get_troops(k-1)->set_p(pp);
             return;
         }
