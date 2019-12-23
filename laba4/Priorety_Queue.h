@@ -102,9 +102,12 @@ public:
         timeline.erase(timeline.begin());
         vector<int>(timeline).swap(timeline);
     }
-    void  erase_queue(int i) {
+    void  erase_queue(laba4::Immoral_Troop* tr) {
+        for(int i=0;i<elem.size();i++)
+            if (elem[i].first.Troop==tr){
         elem.erase(elem.cbegin()+i);
         timeline.erase(timeline.begin()+i);
+            }
     }
     void show(){
         for (int i=0;i<elem.size();i++){

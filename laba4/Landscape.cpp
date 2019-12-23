@@ -34,7 +34,7 @@ namespace  laba4{
         if (m==' '){cell=EMPTYNESS;  object=EMPTY_OBJECT;}
         if (m=='#'){cell=WALL;  object=EMPTY_OBJECT;}
         if (m=='@'){cell=EMPTY_CELL;  object=USER_SUMMONER;}
-        if (m=='*'){cell=EMPTY_CELL;  object=USER_SUMMONER;}
+        if (m=='*'){cell=EMPTY_CELL;  object=ENEMY_SUMMONER;}
         if (m=='U'){cell=EMPTY_CELL;  object=USER_TROOP;}
         if (m=='E'){cell=EMPTY_CELL;  object=ENEMY_TROOP;}
     }
@@ -469,7 +469,7 @@ namespace  laba4{
             else throw runtime_error("Can't move there.End of map");
         }
         if (ch=='a'){//поменял букву
-            if ((tr->get_p().x-1)>0){
+            if ((tr->get_p().x-1)>=0){
                 if ((rectangle[tr->get_p().y][tr->get_p().x-1].get_cell()==POINT)&&(rectangle[tr->get_p().y][tr->get_p().x-1].get_object()==EMPTY_OBJECT)){
                     Coordinates p;
                     p.x=tr->get_p().x-1;
@@ -518,19 +518,22 @@ namespace  laba4{
         S.set_accumulation_coeficient(S.get_accumulation_coeficient() * 2);
     }
     void Landscape:: choose_skill(School *sch, Skill &sk,Summoner& S){
+        int g;
         for (int i=0;i<S.get_size_of_knowledge();i++){
+            g = i;
             if (S.get_knowledge(i).first==sch->get_name()){
                 for(int i=0;i<sch->get_size_of_data();i++){
-                    cout<<i+1<<"."<<sch->get_data(i).get_name()<<endl;
+                    if(S.get_knowledge(g).second>=sch->get_data(i).get_min_knowledge())
+                        cout<<i+1<<"."<<sch->get_data(i).get_name()<<endl;
                 }
                 int k;
                 cin>>k;
                 if (sch->get_data(k-1).get_min_knowledge()<=S.get_knowledge(i).second)
                     sk=sch->get_data(k-1);
                 else throw runtime_error("You don't have enough knowledge for summon this creature");
-                    }
-                }
+            }
         }
+    }
     
     
 }

@@ -65,6 +65,9 @@ namespace   laba4{
                 ((health%2==0))? count=health/creature.get_health(): count=health/creature.get_health()+1;//уменьшение кол-во
             else count=health/creature.get_health();
         }
+        else{ health=0;
+            count=0;
+        }
         if (count0>count){moral--;}
     }
     void Ordinary_Troop:: move_troop(/*const char ch,int m,int n*/){

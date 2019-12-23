@@ -67,6 +67,8 @@ namespace laba4 {
             else
                 count = health / creature.get_health()+1;
             
+        } else{ health=0;
+            count=0;
         }
     }
     ostream& operator <<(ostream& s,const Immoral_Troop& a){
