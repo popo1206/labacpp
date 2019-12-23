@@ -954,7 +954,7 @@ void menu_t(char d,laba4::Landscape &L) {
             ob1.Summoner=L.get_ptr_enemy_summoner();
             ob1.Troop=nullptr;
             queue.push(ob1, L.get_Enemy_Summoner().get_initiative());
-            while ((L.get_User_Summoner().get_health()!=0)||(L.get_Enemy_Summoner().get_health()!=0)){
+            while ((L.get_User_Summoner().get_health()!=0)&&(L.get_Enemy_Summoner().get_health()!=0)){
                 L.print_summoner();
                 if (queue.top().Troop==nullptr) {
                     queue.show();
@@ -974,7 +974,7 @@ void menu_t(char d,laba4::Landscape &L) {
                     queue.push(ob1, ob1.Troop->get_initiative());
                     }
                 }
-                if (queue.top().Troop!=nullptr) {
+                else {
                     queue.show();
                     menu_troop(d, L, queue.top().Troop);
                     laba4::Object ob4 =queue.top();
@@ -982,19 +982,28 @@ void menu_t(char d,laba4::Landscape &L) {
                     queue.push(ob4,ob4.Troop->get_initiative());
                     if (ob4.Summoner==L.get_ptr_user_summoner()){
                     for(int i=0;i<L.get_ptr_enemy_summoner()->get_size_of_troops();i++){
-                        if (L.get_ptr_enemy_summoner()->get_troops(i)->get_health()==0)
+                        if (L.get_ptr_enemy_summoner()->get_troops(i)->get_health()==0){
+                         
                             queue.erase_queue(L.get_ptr_enemy_summoner()->get_troops(i));
+                               L.get_ptr_enemy_summoner()->erase_troop(i);
+                        }
                     }
                     }
                     if (ob4.Summoner==L.get_ptr_enemy_summoner()){
                         for(int i=0;i<L.get_ptr_user_summoner()->get_size_of_troops();i++){
-                            if (L.get_ptr_user_summoner()->get_troops(i)->get_health()==0)
+                            if (L.get_ptr_user_summoner()->get_troops(i)->get_health()==0){
+                              
                                 queue.erase_queue(L.get_ptr_user_summoner()->get_troops(i));
+                                  L.get_ptr_user_summoner()->erase_troop(i);
+                            }
                         }
                     }
                 }
                 L.print_map();
             }
+            if (L.get_User_Summoner().get_health()!=0)
+                cout<<L.get_User_Summoner().get_name()<<" - win!"<<endl;
+            else cout<<L.get_Enemy_Summoner().get_name()<<" -win!"<<endl;
             break;
         }
             

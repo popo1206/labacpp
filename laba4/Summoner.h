@@ -19,7 +19,7 @@ namespace laba4{
         unsigned  health;
         const unsigned max_health=1000;
         unsigned energy;
-        const unsigned max_energy=100;
+        const unsigned max_energy=1000;
         unsigned experience;
         unsigned accumulation_coeficient;
         vector<Immoral_Troop*> troops;
@@ -71,6 +71,7 @@ namespace laba4{
         }
         
         //methods
+        void erase_troop(int i){troops.erase(troops.begin()+i); }
         friend ostream& operator <<(ostream&,const Summoner&);
         Summoner & operator =(const Summoner&);
         void accumulate_energy();

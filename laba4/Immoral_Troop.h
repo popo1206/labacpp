@@ -68,6 +68,7 @@ namespace laba4{
       friend ostream& operator <<(ostream& s,const Immoral_Troop&);
         virtual void attack(Immoral_Troop&);
         virtual void take_damage(Immoral_Troop&);
+    
       virtual void move_troop(/*const char ch,int,int*/);
 
     };
