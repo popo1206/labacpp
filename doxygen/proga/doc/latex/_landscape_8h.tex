@@ -1,0 +1,95 @@
+\hypertarget{_landscape_8h}{}\doxysection{Landscape.\+h File Reference}
+\label{_landscape_8h}\index{Landscape.h@{Landscape.h}}
+
+
+Header file with Landscape and cell discription This file has classes\+: cell\+: a part of Landscape, Lanscape, and class Object.  
+
+
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include \char`\"{}Summoner.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}School.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include \char`\"{}Priorety\+\_\+\+Queue.\+h\char`\"{}}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classlaba4_1_1_cell}{laba4\+::\+Cell}}
+\begin{DoxyCompactList}\small\item\em This clss describes one cell of the map. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classlaba4_1_1_object}{laba4\+::\+Object}}
+\begin{DoxyCompactList}\small\item\em class \mbox{\hyperlink{classlaba4_1_1_object}{Object}} like struct for keeping ptr on object in queue \mbox{\hyperlink{classlaba4_1_1_summoner}{Summoner}} or Troop \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classlaba4_1_1_landscape}{laba4\+::\+Landscape}}
+\begin{DoxyCompactList}\small\item\em class \mbox{\hyperlink{classlaba4_1_1_landscape}{Landscape}} describes a map and two users in this game \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{_landscape_8h_a62287eee21560596c88a05c97b3d4ed1}{laba4\+::cell0}} \{ \mbox{\hyperlink{_landscape_8h_a62287eee21560596c88a05c97b3d4ed1ae2db98355cea526c2e8bd625304d1de6}{laba4\+::\+P\+O\+I\+NT}}, 
+\mbox{\hyperlink{_landscape_8h_a62287eee21560596c88a05c97b3d4ed1a2d5f7722d72b7fc0594088d9a6ef60b6}{laba4\+::\+E\+M\+P\+T\+Y\+N\+E\+SS}}, 
+\mbox{\hyperlink{_landscape_8h_a62287eee21560596c88a05c97b3d4ed1a49b4c83e64da1bc4c84a5d836b26b3d0}{laba4\+::\+W\+A\+LL}}, 
+\mbox{\hyperlink{_landscape_8h_a62287eee21560596c88a05c97b3d4ed1adfc75fa9e01e3e7cf3a77774537296db}{laba4\+::\+E\+M\+P\+T\+Y\+\_\+\+C\+E\+LL}}
+ \}
+\item 
+enum \mbox{\hyperlink{_landscape_8h_a4e567875aecc337e90599cbe3d80121f}{laba4\+::object0}} \{ \newline
+\mbox{\hyperlink{_landscape_8h_a4e567875aecc337e90599cbe3d80121fad4d2268ac28570ca64e17356e010bba9}{laba4\+::\+U\+S\+E\+R\+\_\+\+S\+U\+M\+M\+O\+N\+ER}}, 
+\mbox{\hyperlink{_landscape_8h_a4e567875aecc337e90599cbe3d80121fa2c5440e4df1bb5780de23d13a2132b63}{laba4\+::\+E\+N\+E\+M\+Y\+\_\+\+S\+U\+M\+M\+O\+N\+ER}}, 
+\mbox{\hyperlink{_landscape_8h_a4e567875aecc337e90599cbe3d80121fab697e5b56401f10be9908d891b4e9558}{laba4\+::\+U\+S\+E\+R\+\_\+\+T\+R\+O\+OP}}, 
+{\bfseries E\+N\+E\+M\+Y\+\_\+\+T\+R\+O\+OP}, 
+\newline
+\mbox{\hyperlink{_landscape_8h_a4e567875aecc337e90599cbe3d80121fac6460ecf70db9ddd93254766875fccbb}{laba4\+::\+E\+M\+P\+T\+Y\+\_\+\+O\+B\+J\+E\+CT}}
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Header file with Landscape and cell discription This file has classes\+: cell\+: a part of Landscape, Lanscape, and class Object. 
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{_landscape_8h_file_a62287eee21560596c88a05c97b3d4ed1}\label{_landscape_8h_file_a62287eee21560596c88a05c97b3d4ed1}} 
+\index{Landscape.h@{Landscape.h}!cell0@{cell0}}
+\index{cell0@{cell0}!Landscape.h@{Landscape.h}}
+\doxysubsubsection{\texorpdfstring{cell0}{cell0}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{_landscape_8h_a62287eee21560596c88a05c97b3d4ed1}{laba4\+::cell0}}}
+
+All types of the cell like part of Landcape \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{POINT@{POINT}!Landscape.h@{Landscape.h}}\index{Landscape.h@{Landscape.h}!POINT@{POINT}}}\mbox{\Hypertarget{_landscape_8h_a62287eee21560596c88a05c97b3d4ed1ae2db98355cea526c2e8bd625304d1de6}\label{_landscape_8h_a62287eee21560596c88a05c97b3d4ed1ae2db98355cea526c2e8bd625304d1de6}} 
+P\+O\+I\+NT&Just a floor. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EMPTYNESS@{EMPTYNESS}!Landscape.h@{Landscape.h}}\index{Landscape.h@{Landscape.h}!EMPTYNESS@{EMPTYNESS}}}\mbox{\Hypertarget{_landscape_8h_a62287eee21560596c88a05c97b3d4ed1a2d5f7722d72b7fc0594088d9a6ef60b6}\label{_landscape_8h_a62287eee21560596c88a05c97b3d4ed1a2d5f7722d72b7fc0594088d9a6ef60b6}} 
+E\+M\+P\+T\+Y\+N\+E\+SS&Emptyness\+: barrier. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WALL@{WALL}!Landscape.h@{Landscape.h}}\index{Landscape.h@{Landscape.h}!WALL@{WALL}}}\mbox{\Hypertarget{_landscape_8h_a62287eee21560596c88a05c97b3d4ed1a49b4c83e64da1bc4c84a5d836b26b3d0}\label{_landscape_8h_a62287eee21560596c88a05c97b3d4ed1a49b4c83e64da1bc4c84a5d836b26b3d0}} 
+W\+A\+LL&Wall \+:barrier. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EMPTY\_CELL@{EMPTY\_CELL}!Landscape.h@{Landscape.h}}\index{Landscape.h@{Landscape.h}!EMPTY\_CELL@{EMPTY\_CELL}}}\mbox{\Hypertarget{_landscape_8h_a62287eee21560596c88a05c97b3d4ed1adfc75fa9e01e3e7cf3a77774537296db}\label{_landscape_8h_a62287eee21560596c88a05c97b3d4ed1adfc75fa9e01e3e7cf3a77774537296db}} 
+E\+M\+P\+T\+Y\+\_\+\+C\+E\+LL&This cell is busy ~with object. \\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{_landscape_8h_file_a4e567875aecc337e90599cbe3d80121f}\label{_landscape_8h_file_a4e567875aecc337e90599cbe3d80121f}} 
+\index{Landscape.h@{Landscape.h}!object0@{object0}}
+\index{object0@{object0}!Landscape.h@{Landscape.h}}
+\doxysubsubsection{\texorpdfstring{object0}{object0}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{_landscape_8h_a4e567875aecc337e90599cbe3d80121f}{laba4\+::object0}}}
+
+All types of the object in a cell which can move \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{USER\_SUMMONER@{USER\_SUMMONER}!Landscape.h@{Landscape.h}}\index{Landscape.h@{Landscape.h}!USER\_SUMMONER@{USER\_SUMMONER}}}\mbox{\Hypertarget{_landscape_8h_a4e567875aecc337e90599cbe3d80121fad4d2268ac28570ca64e17356e010bba9}\label{_landscape_8h_a4e567875aecc337e90599cbe3d80121fad4d2268ac28570ca64e17356e010bba9}} 
+U\+S\+E\+R\+\_\+\+S\+U\+M\+M\+O\+N\+ER&User \mbox{\hyperlink{classlaba4_1_1_summoner}{Summoner}}. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ENEMY\_SUMMONER@{ENEMY\_SUMMONER}!Landscape.h@{Landscape.h}}\index{Landscape.h@{Landscape.h}!ENEMY\_SUMMONER@{ENEMY\_SUMMONER}}}\mbox{\Hypertarget{_landscape_8h_a4e567875aecc337e90599cbe3d80121fa2c5440e4df1bb5780de23d13a2132b63}\label{_landscape_8h_a4e567875aecc337e90599cbe3d80121fa2c5440e4df1bb5780de23d13a2132b63}} 
+E\+N\+E\+M\+Y\+\_\+\+S\+U\+M\+M\+O\+N\+ER&Enemy \mbox{\hyperlink{classlaba4_1_1_summoner}{Summoner}}. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{USER\_TROOP@{USER\_TROOP}!Landscape.h@{Landscape.h}}\index{Landscape.h@{Landscape.h}!USER\_TROOP@{USER\_TROOP}}}\mbox{\Hypertarget{_landscape_8h_a4e567875aecc337e90599cbe3d80121fab697e5b56401f10be9908d891b4e9558}\label{_landscape_8h_a4e567875aecc337e90599cbe3d80121fab697e5b56401f10be9908d891b4e9558}} 
+U\+S\+E\+R\+\_\+\+T\+R\+O\+OP&User Troops. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EMPTY\_OBJECT@{EMPTY\_OBJECT}!Landscape.h@{Landscape.h}}\index{Landscape.h@{Landscape.h}!EMPTY\_OBJECT@{EMPTY\_OBJECT}}}\mbox{\Hypertarget{_landscape_8h_a4e567875aecc337e90599cbe3d80121fac6460ecf70db9ddd93254766875fccbb}\label{_landscape_8h_a4e567875aecc337e90599cbe3d80121fac6460ecf70db9ddd93254766875fccbb}} 
+E\+M\+P\+T\+Y\+\_\+\+O\+B\+J\+E\+CT&Enemy Troops. In this cell no object \\
+\hline
+
+\end{DoxyEnumFields}
